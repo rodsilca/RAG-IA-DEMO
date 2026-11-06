@@ -1,0 +1,24 @@
+# Banco dedicado a esta demonstração. O nome de projeto, o volume e a porta são
+# próprios para não colidir com outros PostgreSQL da máquina. A porta só escuta
+# em 127.0.0.1 e as credenciais abaixo valem apenas para este container local.
+name: makerswap-rag-demo
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.1-pg17
+    environment:
+      POSTGRES_USER: rag_demo
+      POSTGRES_PASSWORD: rag_demo_local
+      POSTGRES_DB: makerswap_rag_demo
+    ports:
+      - "127.0.0.1:5544:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag_demo -d makerswap_rag_demo"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:

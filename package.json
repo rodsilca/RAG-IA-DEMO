@@ -1,0 +1,36 @@
+{
+  "name": "makerswap-rag-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prova de conceito de RAG para um marketplace de componentes maker (dados fictícios).",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose stop",
+    "db:init": "tsx src/cli/init-db.ts",
+    "seed": "tsx src/cli/seed.ts",
+    "index": "tsx src/cli/index-products.ts",
+    "index:rebuild": "tsx src/cli/index-products.ts --rebuild",
+    "chat": "tsx src/cli/chat.ts",
+    "chat:debug": "tsx src/cli/chat.ts --debug",
+    "calibrate": "tsx src/cli/calibrate.ts",
+    "acceptance": "tsx src/cli/acceptance.ts",
+    "demo:zero-stock": "tsx src/cli/zero-stock.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test --test-concurrency=1 test/*.test.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^2.32.0",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
